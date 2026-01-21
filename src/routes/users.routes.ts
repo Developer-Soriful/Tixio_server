@@ -1,8 +1,9 @@
 import app from "../app";
 import { usersController } from "../controllers/users.controller";
-
+import { getUsersQuerySchema } from "../dtos/users.dto";
+import { validate } from "../middlewares/validate.middleware";
 // FOR USER
-app.get("/", usersController.getUsers);
+app.get("/", validate(getUsersQuerySchema), usersController.getUsers);
 
 // FOR PARTICULAR USER
 app.get("/:id", usersController.getUserById);
